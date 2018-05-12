@@ -24,6 +24,16 @@
         path: ~/.bashrc
         line: "export APP_BUCKET_NAME={{bucket_name}}"
 
+    - raw: git config --global user.name "Kuba Kanclerz"
+    - raw: git config --global user.email "kanclerj@uek.krakow.pl"
+
+
+
+
+
+
+
+
 
 
 
