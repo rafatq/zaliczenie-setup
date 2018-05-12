@@ -32,8 +32,8 @@
     - raw: git config --global user.email "kanclerj@uek.krakow.pl"
     - pip:
         name: "{{ item }}"
+        executable: pip3.6
       with_items: "{{ python_dependencies }}"
-      executable: pip3.6
       become: yes
 
 
