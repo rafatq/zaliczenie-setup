@@ -7,6 +7,7 @@
       - git
       - tree
       - mc
+    bucket_name: "kkanclerz-zid"
   tasks:
     - name: "Install os packages"
       yum:
@@ -18,6 +19,21 @@
       git:
         repo: https://bitbucket.org/jkanclerz/ani-creator.git
         dest: ~/ani-creator
+    - name: "ensure env is configured"
+      lineinfile:
+        path: ~/.bashrc
+        line: "export APP_BUCKET_NAME={{bucket_name}}"
+
+
+
+
+
+
+
+
+
+
+
     
      
   
