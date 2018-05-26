@@ -1,17 +1,5 @@
 ---
 - hosts: web_nodes
-  vars:
-    os_packages:
-      - python36
-      - python36-pip
-      - git
-      - tree
-      - mc
-    bucket_name: "kkanclerz-zid"
-    python_dependencies:
-      - boto3
-      - pytest
-      - flask
   tasks:
     - name: "Install os packages"
       yum:
@@ -21,15 +9,18 @@
       become: yes
     - name: "sync my repo"
       git:
-        repo: https://bitbucket.org/jkanclerz/ani-creator.git
-        dest: ~/ani-creator
+        repo: "{{repository_url}}"
+        dest: "{{app_root_dir}}"
     - name: "ensure env is configured"
       lineinfile:
         path: ~/.bashrc
         line: "export APP_BUCKET_NAME={{bucket_name}}"
+    - lineinfile:
+        path: ~/.bashrc
+        line: "export PYTHONPATH={{app_root_dir}}"
 
-    - raw: git config --global user.name "Kuba Kanclerz"
-    - raw: git config --global user.email "kanclerj@uek.krakow.pl"
+    - raw: git config --global user.name "{{git.user}}"
+    - raw: git config --global user.email "{{git.email}}"
     - pip:
         name: "{{ item }}"
         executable: pip-3.6
